@@ -2447,29 +2447,17 @@ FILE_EVENT3(40034, trace_Selector_RemoveAllHandlers_Impl, LOG_INFO, PAL_T("Selec
 #endif
 FILE_EVENT1(40035, trace_ServerFailedPamCheckUser_Impl, LOG_INFO, PAL_T("Server failed to authenticate user: (%s)"), const char*)
 #if defined(CONFIG_ENABLE_DEBUG)
-#define trace_SigHUP_received(a0) trace_SigHUP_received_Impl(__FILE__, __LINE__, scs(a0))
-#else
-#define trace_SigHUP_received(a0) trace_SigHUP_received_Impl(0, 0, scs(a0))
-#endif
-FILE_EVENT1(40036, trace_SigHUP_received_Impl, LOG_INFO, PAL_T("SIGHUP received at: (%s)"), const char*)
-#if defined(CONFIG_ENABLE_DEBUG)
-#define trace_SigTERM_received(a0) trace_SigTERM_received_Impl(__FILE__, __LINE__, scs(a0))
-#else
-#define trace_SigTERM_received(a0) trace_SigTERM_received_Impl(0, 0, scs(a0))
-#endif
-FILE_EVENT1(40037, trace_SigTERM_received_Impl, LOG_INFO, PAL_T("SIGTERM received at: (%s)"), const char*)
-#if defined(CONFIG_ENABLE_DEBUG)
 #define trace_Product_Version(a0, a1, a2) trace_Product_Version_Impl(__FILE__, __LINE__, scs(a0), scs(a1), scs(a2))
 #else
 #define trace_Product_Version(a0, a1, a2) trace_Product_Version_Impl(0, 0, scs(a0), scs(a1), scs(a2))
 #endif
-FILE_EVENT3(40038, trace_Product_Version_Impl, LOG_INFO, PAL_T("Starting %s: version: (%s), platform: (%s)"), const char*, const char*, const char*)
+FILE_EVENT3(40036, trace_Product_Version_Impl, LOG_INFO, PAL_T("Starting %s: version: (%s), platform: (%s)"), const char*, const char*, const char*)
 #if defined(CONFIG_ENABLE_DEBUG)
 #define trace_New_Request(a0, a1, a2) trace_New_Request_Impl(__FILE__, __LINE__, tcs(a0), tcs(a1), tcs(a2))
 #else
 #define trace_New_Request(a0, a1, a2) trace_New_Request_Impl(0, 0, tcs(a0), tcs(a1), tcs(a2))
 #endif
-FILE_EVENT3(40039, trace_New_Request_Impl, LOG_INFO, PAL_T("New request received: command=(%T), namespace=(%T), class=(%T)"), const TChar*, const TChar*, const TChar*)
+FILE_EVENT3(40037, trace_New_Request_Impl, LOG_INFO, PAL_T("New request received: command=(%T), namespace=(%T), class=(%T)"), const TChar*, const TChar*, const TChar*)
 #if defined(CONFIG_ENABLE_DEBUG)
 #define trace_DumpAllocList_Warning() trace_DumpAllocList_Warning_Impl(__FILE__, __LINE__)
 #else
