@@ -930,6 +930,7 @@ static MI_Boolean _ProcessAuthMessage(
         if (r && !keepConnection)
         {
             ProtocolSocket_Release(handler);
+            return MI_FALSE;
         }
 
         return r;
@@ -947,7 +948,7 @@ static MI_Boolean _ProcessAuthMessage(
             ProtocolSocket_Release(handler);
         }
 
-        return r;
+        return MI_FALSE;
     }
 
     /* client waiting for server's response? */
@@ -2067,30 +2068,27 @@ static Protocol_CallbackResult _ProcessReceivedMessage(
                                 return PRT_RETURN_FALSE;
                             }
 
-                            // close socket to server
-                            trace_EngineClosingSocket(handler, handler->base.sock);
-                            Selector_RemoveHandler(socketAndBase->internalProtocolBase.selector, 
-                                                   &(socketAndBase->protocolSocket.base));
-
                             r = _ProtocolSocketTrackerRemoveElement(s);
                             if(MI_RESULT_OK != r)
                             {
                                 trace_TrackerHashMapError();
                                 return PRT_RETURN_FALSE;
                             }
+
+                            // close socket to server
+                            trace_EngineClosingSocket(handler, handler->base.sock);
                         }
                         else
                         {
                             forwardSock = handler->base.sock;
+                            ret = PRT_CONTINUE;
                         }
 
                         handler = newHandler;
 
-                        if(_SendAuthResponse(handler, binMsg->result, binMsg->authFile, forwardSock, 
-                                             binMsg->uid, binMsg->gid))
-                        {
-                            ret = PRT_CONTINUE;
-                        }
+                        if(!_SendAuthResponse(handler, binMsg->result, binMsg->authFile, forwardSock, 
+                                              binMsg->uid, binMsg->gid))
+                            trace_ClientAuthResponseFailed();
                     }
                     else
                     {

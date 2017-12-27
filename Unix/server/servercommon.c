@@ -1362,6 +1362,10 @@ void ServerCleanup(int pidfile)
         DestroyKrb5CredCache(s_optsPtr->krb5CredCacheSpec); // So it can't be looked at after run
         PAL_Free(s_optsPtr->krb5CredCacheSpec);
     }
+    if (s_optsPtr->krb5KeytabPath)
+    {
+        PAL_Free(s_optsPtr->krb5KeytabPath);
+    }
 
 #if defined(CONFIG_POSIX)
     if (pidfile != -1)

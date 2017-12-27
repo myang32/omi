@@ -345,8 +345,6 @@ OI_EVENT("Reg file %s is corrupted. It will be skipped by the server")
 void trace_ProvReg_SkipRegFile(const char * filePath);
 OI_EVENT("LIBRARY tag is missing in reg file: %s")
 void trace_RegFile_MissingLibraryTag(const char * filePath);
-OI_EVENT("NTLM Credentials file does not exist or invalid permissions: %s")
-void trace_NtlmCredFileInvalid(const char * ntlmfile);
 
 OI_EVENT("Invalid engine credentials")
 void trace_InvalidEngineCredentials();
@@ -372,7 +370,8 @@ OI_EVENT("Engine AskServerToAuthenticate received NULL callback")
 void trace_EngineAuthenticateNullCallback();
 OI_EVENT("HTTP: Client Authorization failed. gss:(%s) mech:(%s)")
 void trace_HTTP_ClientAuthFailed(const char * major, const char * minor);
-
+OI_EVENT("Failed to send auth response to client")
+void trace_ClientAuthResponseFailed();
 
 
 /******************************** WARNINGS ***********************************/
@@ -928,6 +927,8 @@ OI_EVENT("WARNING: one or more blocks still allocated!")
 void trace_DumpAllocList_Warning();
 OI_EVENT("BLOCK: %s(%u): ptr=%p: magic=%08X id=%u size=%u")
 void trace_DumpAllocList_Block(const char* file, unsigned int line, const void* ptr, unsigned int magic, unsigned int id, unsigned int size);
+OI_EVENT("NTLM Credentials file does not exist or invalid permissions: %s")
+void trace_NtlmCredFileInvalid(const char * ntlmfile);
 
 /******************************** DEBUG TRACES ***********************************/
 
